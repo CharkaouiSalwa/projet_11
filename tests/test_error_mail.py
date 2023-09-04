@@ -11,5 +11,4 @@ def test_showSummary_with_valid_email():
 def test_showSummary_with_invalid_email():
     client = app.test_client()
     response = client.post('/showSummary', data={'email': 'invalid_email@example.com'})
-    assert response.status_code == 302  # Vérifiez que la réponse est une redirection (code 302)
-
+    assert response.status_code == 302
