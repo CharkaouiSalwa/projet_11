@@ -1,10 +1,10 @@
 import pytest
-from server import app, competitions, clubs  # Importez les modules appropriés depuis votre application
+from server import app, competitions, clubs
 from datetime import datetime, timedelta
-import json
 
-date_past = datetime.now() - timedelta(days=7)  # Date d'une semaine passée
-date_future = datetime.now() + timedelta(days=7)  # Date d'une semaine à venir
+
+date_past = datetime.now() - timedelta(days=7)
+date_future = datetime.now() + timedelta(days=7)
 
 # une compétition passée et un club valide
 competition_name = "Spring Festival"
