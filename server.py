@@ -36,7 +36,7 @@ def showSummary():
             return redirect(url_for('index'))
     except Exception as e:
         flash("An error occurred. Please try again.")
-        #return redirect(url_for('index'))
+
     return render_template('index.html', error_message="Unknown email adress !")
 
 
@@ -54,12 +54,35 @@ def book(competition,club):
 
 @app.route('/purchasePlaces',methods=['POST'])
 def purchasePlaces():
-    competition = [c for c in competitions if c['name'] == request.form['competition']][0]
-    club = [c for c in clubs if c['name'] == request.form['club']][0]
-    placesRequired = int(request.form['places'])
-    competition['numberOfPlaces'] = int(competition['numberOfPlaces'])-placesRequired
-    flash('Great-booking complete!')
-    return render_template('welcome.html', club=club, competitions=competitions)
+    try:
+        competition_name = request.form['competition']
+        club_name = request.form['club']
+        places_required = int(request.form['places'])
+
+        # Trouver la compétition et le club correspondants dans les listes
+        competition = next((c for c in competitions if c['name'] == competition_name), None)
+        club = next((c for c in clubs if c['name'] == club_name), None)
+
+        if competition is None or club is None:
+            flash("Club or competition not found.")
+        elif competition['numberOfPlaces'] < places_required:
+            flash("Not enough places available for booking.")
+        else:
+            # Vérifier si le club a suffisamment de points pour réserver
+            if club['points'] >= places_required:
+                # Déduire le nombre de places réservées de la compétition
+                competition['numberOfPlaces'] -= places_required
+                # Déduire les points du club
+                club['points'] -= places_required
+                flash(f"Booking complete! {places_required} places booked for {competition_name}")
+            else:
+                flash("Not enough points to make the booking.")
+
+        return render_template('welcome.html', club=club, competitions=competitions)
+    except Exception as e:
+        flash("An error occurred. Please try again.")
+        return redirect(url_for('index'))
+
 
 
 # TODO: Add route for points display
