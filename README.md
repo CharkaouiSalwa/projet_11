@@ -49,3 +49,12 @@
     We also like to show how well we're testing, so there's a module called 
     [coverage](https://coverage.readthedocs.io/en/coverage-5.1/) you should add to your project.
 
+   6. Execution 
+         Use the command to run unit tests :  <code>python -m unittest tests_unit/test_server.py</code>
+         Use the command to run functional tests and integration tests: <code>pytest tests/nom_fichier.py</code>
+         Use the command to run the program : <code>python -m flask run</code>
+         Use the command to run the coverage : <code>coverage run -m pytest tests tests_unit tests_integration </code>
+                                                <code>coverage report </code>
+                                                <code>coverage html </code>
+      
+    
