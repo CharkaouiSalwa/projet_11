@@ -38,8 +38,8 @@ def showSummary():
             return redirect(url_for('index'))
     except Exception as e:
         flash("An error occurred. Please try again.")
+        return redirect(url_for('index'))
 
-    return render_template('index.html', error_message="Unknown email adress !")
 
 
 
