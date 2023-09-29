@@ -70,6 +70,7 @@ def purchasePlaces():
         else:
             # Convertir le nombre de points du club en entier
             club_points = int(club['points'])
+            competition_place = int(competition['numberOfPlaces'])
             # Vérifier si le nombre de places demandées dépasse le maximum de 12
             if places_required > 12:
                 flash("You can only book up to 12 places.")
@@ -80,9 +81,11 @@ def purchasePlaces():
                 # Vérifier si le club a suffisamment de points pour réserver
                 if club_points >= places_required:
                     # Déduire le nombre de places réservées de la compétition
-                    competition['numberOfPlaces'] -= places_required
+                    competition_place -= places_required
+                    competition['numberOfPlaces'] = str(competition_place)
                     # Déduire les points du club
-                    club['points'] -= places_required
+                    club_points -= places_required
+                    club['points'] = str(club_points)
                     flash('Booking complete! Number of places purchased: ' + str(places_required))
                 else:
                     flash("Not enough points to make the booking.")
