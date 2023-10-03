@@ -35,7 +35,7 @@ def test_integration():
         'competition': competition_name,
         'places': '1'
     })
-    assert response.status_code == 302
+    assert response.status_code == 200
 
     #  Accédez à la page d'affichage des points
     response = client.get('/points_display')
