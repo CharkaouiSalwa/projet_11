@@ -35,7 +35,7 @@ class TestServer(unittest.TestCase):
     def test_purchase_places_valid(self):
         response = self.app.post('/purchasePlaces',
                                     data={'club': 'Simply Lift', 'competition': 'Spring Festival', 'places': '5'})
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 200)
 
     def test_purchase_places_invalid_club_or_competition(self):
         competition_name = 'Spring Festival'
